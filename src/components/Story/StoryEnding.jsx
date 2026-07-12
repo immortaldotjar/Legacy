@@ -12,13 +12,15 @@ export default function StoryEnding({
 
         <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
 
-            <h2 className="font-serif text-5xl">
+            <p className="eyebrow text-xs text-paper-dim">End of Reel</p>
+
+            <h2 className="mt-4 font-display text-5xl">
 
                 The End
 
             </h2>
 
-            <p className="mt-10 max-w-3xl text-2xl leading-10 text-zinc-300">
+            <p className="mt-10 max-w-3xl font-display text-2xl italic leading-10 text-paper/80">
 
                 {ending}
 
@@ -34,10 +36,10 @@ export default function StoryEnding({
 
                 }}
 
-                className="mt-20 rounded-full bg-white px-8 py-4 font-medium text-black transition hover:-translate-y-1"
+                className="mt-20 flex items-center gap-2 rounded-full bg-paper px-8 py-4 font-medium text-ink transition hover:-translate-y-1"
 
             >
-                Create Another Story
+                Record Another Story
             </button>
 
         </section>

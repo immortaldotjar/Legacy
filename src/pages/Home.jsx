@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,108 +6,76 @@ import { fadeUp } from "../animations/fadeUp";
 import { stagger } from "../animations/stagger";
 
 export default function Home() {
-    const nav = useNavigate();
+  const nav = useNavigate()
 
-    return (
-        <div className="relative center h-screen bg-zinc-950 text-white ">
-            <div className="absolute inset-0">
-                <motion.div
-                    animate={{
-                        x: [-20, 20, -20],
-                        y: [10, -10, 10],
-                    }}
-                    transition={{
-                        duration: 22,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut",
-                    }}
-                    className="absolute left-0 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/30 blur-[180px]" />
-                <motion.div
-                    animate={{
-                        scale: [1, 1.08, 1],
-                        opacity: [0.2, 0.35, 0.2],
-                    }}
-                    transition={{
-                        duration: 18,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut",
-                    }} className="absolute left-1/2 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/30 blur-[180px]" />
-                <motion.div
-                    animate={{
-                        x: [20, -20, 20],
-                        y: [-10, 10, -10],
-                    }}
-                    transition={{
-                        duration: 24,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut",
-                    }} className="absolute left-full top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/30 blur-[180px]" />
-                    
-            </div>
+  return (
+    <div className="grain relative flex h-screen flex-col items-center justify-center overflow-hidden bg-ink text-paper">
+      <motion.div
+        aria-hidden
+        animate={{ x: ["-130%", "130%", "-130%"] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
+        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/20 to-transparent blur-2xl"
+      />
+      <motion.div
+        aria-hidden
+        animate={{ x: ["130%", "-130%", "130%"] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay:3 }}
+        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/20 to-transparent blur-2xl "
+      />
+      <motion.div
+        aria-hidden
+        animate={{ y: ["-130%", "130%"] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay: 0,delay:6 }}
+        className="pointer-events-none absolute top-0 h-11/12 w-full bg-linear-to-t from-transparent via-violet-500/5 to-transparent blur-2xl mx-50"
+      />
 
-            <motion.div
-                variants={stagger}
-                initial="hidden"
-                animate="visible"
-                className="relative z-10 max-w-4xl px-6 text-center"
-            >
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 max-w-3xl px-6 text-center "
+      >
+        <motion.p variants={fadeUp} className="eyebrow text-sm text-brass">
+          Legacy — a documentary of you
+        </motion.p>
 
-                <motion.p
-                    variants={fadeUp}
-                    className=" uppercase tracking-[30px] text-white font-bold "
-                >
-                    Legacy
-                </motion.p>
+        <motion.h1
+          variants={fadeUp}
+          className="mt-6 font-display text-6xl font-semibold leading-[0.95] md:text-8xl"
+        >
+          Every Passion
+          <br />
+          Has a Story.
+        </motion.h1>
 
-                <motion.h1
-                    variants={fadeUp}
-                    className="font-serif text-6xl font-semibold md:text-8xl"
-                >
-                    Every Passion
-                    <br />
-                    Has a Story.
-                </motion.h1>
+        <motion.p
+          variants={fadeUp}
+          className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-paper-dim"
+        >
+          Answer six questions about the life you've lived. Legacy cuts your
+          memories into six scenes — a short, cinematic story of your own
+          making.
+        </motion.p>
 
-                <motion.p
-                    variants={fadeUp}
-                    className="mx-auto mt-8 max-w-2xl text-lg text-zinc-300"
-                >
-                    Answer a few thoughtful questions and let AI transform
-                    your memories into a cinematic documentary that feels
-                    like your own movie.
-                </motion.p>
+        <motion.button
+          variants={fadeUp}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => nav("/interview")}
+          className="group mt-12 inline-flex items-center gap-3 rounded-full bg-rec px-8 py-2 font-medium text-paper transition hover:bg-rec/90"
+        >
 
-                <motion.button
-                    variants={fadeUp}
-                    whileHover={{
-                        scale: 1.02
-                    }}
-                    whileTap={{
-                        scale: 0.98
-                    }}
-                    onClick={() => nav("/interview")}
-                    className="group mt-10 inline-flex items-center gap-3 rounded-lg bg-white px-8 py-3 font-medium text-black transition"
-                >
-                    Begin Your Story
+          Begin Your Story
+          <ArrowRight
+            size={18}
+            className="transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </motion.button>
 
-                    <ArrowRight
-                        size={18}
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
-                </motion.button>
-
-                <motion.p
-                    variants={fadeUp}
-                    className="mt-10 italic text-zinc-200"
-                >
-                    Every great journey begins with a single moment.
-                </motion.p>
-
-            </motion.div>
-
-        </div>
-    )
+        <motion.p variants={fadeUp} className="mt-8 font-display italic text-paper-dim">
+          Seven questions. Seven scenes. One story.
+        </motion.p>
+      </motion.div>
+    </div>
+  );
 }

@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Film } from "lucide-react";
 
 export default function NavigationButtons({
   current,
@@ -7,9 +7,10 @@ export default function NavigationButtons({
   next,
   onGenerate,
 }) {
+  const isLast = current === total - 1;
+
   return (
     <div className="mt-12 flex items-center justify-between">
-
       <button
         onClick={previous}
         disabled={current === 0}
@@ -19,12 +20,12 @@ export default function NavigationButtons({
           gap-2
           rounded-full
           border
-          border-white/10
+          border-paper/10
           px-6
           py-3
-          text-white
+          text-paper
           transition
-          hover:bg-white/5
+          hover:bg-paper/5
           disabled:cursor-not-allowed
           disabled:opacity-30
         "
@@ -34,31 +35,33 @@ export default function NavigationButtons({
       </button>
 
       <button
-        onClick={current === total - 1
-          ? onGenerate
-          : next
-        }
+        onClick={isLast ? onGenerate : next}
         className="
           flex
           items-center
           gap-2
           rounded-full
-          bg-white
+          bg-paper
           px-7
           py-3
           font-medium
-          text-black
+          text-ink
           transition
           hover:-translate-y-0.5
         "
       >
-        {current === total - 1
-          ? "Generate Legacy"
-          : "Next"}
-
-        <ArrowRight size={18} />
+        {isLast ? (
+          <>
+            <Film size={18} />
+            Cut the Reel
+          </>
+        ) : (
+          <>
+            Next
+            <ArrowRight size={18} />
+          </>
+        )}
       </button>
-
     </div>
   );
 }

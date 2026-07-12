@@ -38,12 +38,19 @@ The JSON must follow this schema exactly:
   "title": "",
   "tagline": "",
   "openingQuote": "",
+
+  "character": {
+    "appearance": "",
+    "personality": ""
+  },
+
   "chapters": [
     {
       "title": "",
       "content": ""
     }
   ],
+
   "ending": ""
 }
 
