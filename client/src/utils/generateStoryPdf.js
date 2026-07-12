@@ -139,7 +139,6 @@ export async function generateStoryPdf(story, onProgress = () => {}) {
         })
     );
 
-    // ---------- Cover page ----------
     onProgress("Laying out cover…");
     fillPageBackground(doc);
     drawEyebrow(doc, "", MARGIN, MARGIN);

@@ -6,12 +6,20 @@ import StoryHero from "../components/Story/StoryHero";
 import StoryChapter from "../components/Story/StoryChapter";
 import StoryEnding from "../components/Story/StoryEnding";
 import { pageTransition } from "../animations/pageTransition";
+import { hasStorySession } from "../services/api";
 
 export default function Story() {
   const [story] = useState(() => {
-    const saved = localStorage.getItem("legacy-story");
-    return saved ? JSON.parse(saved) : null;
+    try {
+      const saved = localStorage.getItem("legacy-story");
+      const parsed = saved ? JSON.parse(saved) : null;
+      return parsed && Array.isArray(parsed.chapters) ? parsed : null;
+    } catch {
+      return null;
+    }
   });
+
+  const [authorized, setAuthorized] = useState(story ? null : false);
 
   const navigate = useNavigate();
 
@@ -21,10 +29,26 @@ export default function Story() {
   useEffect(() => {
     if (!story) {
       navigate("/");
+      return;
     }
+
+    let cancelled = false;
+    hasStorySession().then((ok) => {
+      if (cancelled) return;
+      if (!ok) {
+        localStorage.removeItem("legacy-story");
+        navigate("/");
+      } else {
+        setAuthorized(true);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [story, navigate]);
 
-  if (!story) return null;
+  if (!story || !authorized) return null;
 
   return (
     <motion.div

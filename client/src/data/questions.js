@@ -5,7 +5,7 @@ export const questions = [
     type: "text",
     chapter: "Rolling Camera... and Action...",
     question: "What's your name?",
-    placeholder: "e.g. Arjun",
+    placeholder: "Victor Von Doom",
     extraField: {
       key: "gender",
       label: "Character gender",

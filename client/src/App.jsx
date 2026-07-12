@@ -26,6 +26,7 @@ function App() {
   return (
     <BrowserRouter>
       <AnimatedRoutes />
+      
     </BrowserRouter>
   );
 }

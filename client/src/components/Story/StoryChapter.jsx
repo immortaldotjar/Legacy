@@ -15,10 +15,6 @@ export default function StoryChapter({ chapter, index, image }) {
     const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
     const imageScale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
 
-    // Top-left corner sits a little lower than the top-right while the card
-    // is sliding in, so the top edge reads as a slight incline; both
-    // corners converge back to 0 (a straight edge) once the card is fully
-    // pinned at the top of the viewport (scrollYProgress -> 1).
     const tilt = useTransform(scrollYProgress, [0, 1], [46, 0]);
     const cardClipPath = useMotionTemplate`polygon(0px ${tilt}px, 100% 0px, 100% 100%, 0px 100%)`;
 

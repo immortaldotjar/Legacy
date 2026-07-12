@@ -13,7 +13,7 @@ export default function StoryEnding({
 
     const navigate = useNavigate();
 
-    const [pdfStatus, setPdfStatus] = useState("idle"); // idle | working | error
+    const [pdfStatus, setPdfStatus] = useState("idle");
     const [pdfLabel, setPdfLabel] = useState("");
 
     const handleDownload = async () => {
@@ -35,7 +35,7 @@ export default function StoryEnding({
 
         <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
 
-            <p className="eyebrow text-xs text-paper-dim">End of Reel</p>
+            <p className="eyebrow text-xs text-paper-dim">End of Story</p>
 
             <h2 className="mt-4 font-display text-5xl">
 
@@ -61,7 +61,7 @@ export default function StoryEnding({
 
                     }}
 
-                    className="flex items-center gap-2 rounded-full bg-paper px-8 py-4 font-medium text-ink transition hover:-translate-y-1"
+                    className="flex items-center gap-2 rounded-full bg-paper px-8 py-2 font-medium text-ink transition hover:-translate-y-1"
 
                 >
                     Record Another Story
@@ -71,7 +71,7 @@ export default function StoryEnding({
                     <button
                         onClick={handleDownload}
                         disabled={pdfStatus === "working"}
-                        className="flex items-center gap-2 rounded-full border border-brass px-8 py-4 font-medium text-paper transition hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                        className="flex items-center gap-2 rounded-full border border-brass px-8 py-2 font-medium text-paper transition hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                     >
                         {pdfStatus === "working" ? (
                             <>

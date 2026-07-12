@@ -6,6 +6,7 @@ export async function generateLegacy(answers) {
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(answers),
     });
 
@@ -15,4 +16,16 @@ export async function generateLegacy(answers) {
     }
 
     return await response.json();
+}
+export async function hasStorySession() {
+    try {
+        const response = await fetch(`${API_URL}/session`, {
+            credentials: "include",
+        });
+        if (!response.ok) return false;
+        const data = await response.json();
+        return Boolean(data.authorized);
+    } catch {
+        return false;
+    }
 }
