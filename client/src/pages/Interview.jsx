@@ -28,7 +28,12 @@ export default function Interview() {
 
     const navigate = useNavigate();
 
+    const currentAnswer = answers[question.key];
+    const isAnswered = typeof currentAnswer === "string" && currentAnswer.trim().length > 0;
+
     async function handleGenerate() {
+        if (!isAnswered) return;
+
         try {
             setError(null);
             setLoading(true);
@@ -98,6 +103,7 @@ export default function Interview() {
                     previous={previous}
                     next={next}
                     onGenerate={handleGenerate}
+                    disabled={!isAnswered}
                 />
 
             </div>

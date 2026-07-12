@@ -6,6 +6,7 @@ export default function NavigationButtons({
   previous,
   next,
   onGenerate,
+  disabled,
 }) {
   const isLast = current === total - 1;
 
@@ -36,6 +37,7 @@ export default function NavigationButtons({
 
       <button
         onClick={isLast ? onGenerate : next}
+        disabled={disabled}
         className="
           flex
           items-center
@@ -48,6 +50,9 @@ export default function NavigationButtons({
           text-ink
           transition
           hover:-translate-y-0.5
+          disabled:cursor-not-allowed
+          disabled:opacity-30
+          disabled:hover:translate-y-0
         "
       >
         {isLast ? (

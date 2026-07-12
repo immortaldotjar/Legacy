@@ -1,7 +1,6 @@
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 import { fadeUp } from "../animations/fadeUp";
 import { stagger } from "../animations/stagger";
 
@@ -13,14 +12,14 @@ export default function Home() {
       <motion.div
         aria-hidden
         animate={{ x: ["-130%", "130%", "-130%"] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
-        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/20 to-transparent blur-2xl"
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay: 3,delay:2 }}
+        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/10 to-transparent blur-2xl"
       />
       <motion.div
         aria-hidden
         animate={{ x: ["130%", "-130%", "130%"] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay:3 }}
-        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/20 to-transparent blur-2xl "
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay:3,delay:2 }}
+        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/10 to-transparent blur-2xl "
       />
       <motion.div
         aria-hidden
@@ -36,7 +35,7 @@ export default function Home() {
         className="relative z-10 max-w-3xl px-6 text-center "
       >
         <motion.p variants={fadeUp} className="eyebrow text-sm text-brass">
-          Legacy — a documentary of you
+          Legacy — A Documentary of you
         </motion.p>
 
         <motion.h1
@@ -52,8 +51,8 @@ export default function Home() {
           variants={fadeUp}
           className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-paper-dim"
         >
-          Answer six questions about the life you've lived. Legacy cuts your
-          memories into six scenes — a short, cinematic story of your own
+          Answer Seven questions about the life you've lived. Legacy cuts your
+          memories into Seven scenes — a short, cinematic story of your own
           making.
         </motion.p>
 

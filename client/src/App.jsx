@@ -25,9 +25,8 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter>
-      {/* <AnimatedRoutes /> */}
-      {/* <LoadingScreen/> */}
-      <Story/>
+      <AnimatedRoutes />
+      
     </BrowserRouter>
   );
 }

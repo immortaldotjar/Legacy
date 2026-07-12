@@ -21,7 +21,7 @@ export default function StoryHero({
                     duration: 22,
                     repeat: Infinity
                 }}
-                className="pointer-events-none absolute h-[700px] w-[700px] rounded-full bg-rec/10 blur-[180px]"
+                className="pointer-events-none absolute h-175 w-175 rounded-full bg-rec/10 blur-[180px]"
             />
 
             <div className="relative z-10 max-w-5xl text-center">

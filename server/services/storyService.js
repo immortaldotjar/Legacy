@@ -1,5 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { generateStoryImages } from "./imageService.js";
+import { findMissingFields } from "./validateAnswers.js";
+import { SESSION_COOKIE_NAME, SESSION_TTL_MS, createSessionCookieValue, isSessionValid } from "./session.js";
 
 function buildFallbackStory(answers) {
     const chapters = [
@@ -102,7 +104,6 @@ Rules:
 
     const text = response.text.trim();
 
-    // Gemini sometimes wraps JSON
     const clean = text
         .replace(/```json/g, "")
         .replace(/```/g, "")
@@ -111,10 +112,6 @@ Rules:
     return JSON.parse(clean);
 }
 
-// Isolated on purpose: this must keep working even when the main story
-// generation call fails and falls back to the offline story, and it must
-// never throw - callers just get "" back and the image prompt omits any
-// gender instruction rather than forcing a wrong guess.
 async function inferPresentation(name) {
     if (!name || !process.env.GEMINI_API_KEY) return "";
 
@@ -145,6 +142,13 @@ export async function generateStory(req, res) {
 
         const answers = req.body;
 
+        const missing = findMissingFields(answers);
+        if (missing.length > 0) {
+            return res.status(400).json({
+                error: `Missing required answers: ${missing.join(", ")}`,
+            });
+        }
+
         let story;
 
         try {
@@ -170,6 +174,13 @@ export async function generateStory(req, res) {
 
         story.images = images;
 
+        res.cookie(SESSION_COOKIE_NAME, createSessionCookieValue(), {
+            httpOnly: true,
+            sameSite: "lax",
+            maxAge: SESSION_TTL_MS,
+            path: "/",
+        });
+
         console.log("Story completed.");
 
         return res.json(story);
@@ -184,4 +195,9 @@ export async function generateStory(req, res) {
 
     }
 
+}
+
+export function checkStorySession(req, res) {
+    const authorized = isSessionValid(req.cookies?.[SESSION_COOKIE_NAME]);
+    return res.json({ authorized });
 }

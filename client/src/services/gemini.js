@@ -7,11 +7,9 @@ const ai = new GoogleGenAI({
 function cleanJson(text) {
     if (!text) return "";
 
-    // Remove markdown fences
     text = text.replace(/```json/gi, "");
     text = text.replace(/```/g, "");
 
-    // Extract only the JSON object
     const start = text.indexOf("{");
     const end = text.lastIndexOf("}");
 
