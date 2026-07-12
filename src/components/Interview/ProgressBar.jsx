@@ -1,5 +1,3 @@
-import { toTimecode } from "../../utils/timecode";
-
 export default function ProgressBar({ current, total }) {
   return (
     <div className="mb-12">

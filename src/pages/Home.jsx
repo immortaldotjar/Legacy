@@ -13,14 +13,14 @@ export default function Home() {
       <motion.div
         aria-hidden
         animate={{ x: ["-130%", "130%", "-130%"] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
-        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/20 to-transparent blur-2xl"
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay: 3,delay:2 }}
+        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/10 to-transparent blur-2xl"
       />
       <motion.div
         aria-hidden
         animate={{ x: ["130%", "-130%", "130%"] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay:3 }}
-        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/20 to-transparent blur-2xl "
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatDelay:3,delay:2 }}
+        className="pointer-events-none absolute top-0 h-full w-1/3 bg-linear-to-r from-transparent via-rec/10 to-transparent blur-2xl "
       />
       <motion.div
         aria-hidden
