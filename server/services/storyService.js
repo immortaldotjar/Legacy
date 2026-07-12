@@ -174,9 +174,12 @@ export async function generateStory(req, res) {
 
         story.images = images;
 
+        const isProduction = process.env.NODE_ENV === "production";
+
         res.cookie(SESSION_COOKIE_NAME, createSessionCookieValue(), {
             httpOnly: true,
-            sameSite: "lax",
+            sameSite: isProduction ? "none" : "lax",
+            secure: isProduction,
             maxAge: SESSION_TTL_MS,
             path: "/",
         });
