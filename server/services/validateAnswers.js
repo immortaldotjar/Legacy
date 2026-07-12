@@ -1,3 +1,4 @@
+
 const REQUIRED_FIELDS = [
     "name",
     "passion",

@@ -173,6 +173,7 @@ export async function generateStory(req, res) {
         const images = await generateStoryImages(story.chapters, answers?.name, presentation);
 
         story.images = images;
+        const isProduction = process.env.NODE_ENV === "production";
 
         const isProduction = process.env.NODE_ENV === "production";
 

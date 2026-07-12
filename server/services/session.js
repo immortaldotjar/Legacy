@@ -1,4 +1,5 @@
 import crypto from "crypto";
+
 const SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
 
 if (!process.env.SESSION_SECRET) {
@@ -11,7 +12,7 @@ if (!process.env.SESSION_SECRET) {
 }
 
 export const SESSION_COOKIE_NAME = "legacy_story_session";
-export const SESSION_TTL_MS = 60 * 60 * 1000;
+export const SESSION_TTL_MS = 60 * 60 * 1000; 
 
 function sign(encodedPayload) {
     return crypto.createHmac("sha256", SECRET).update(encodedPayload).digest("hex");
