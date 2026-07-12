@@ -1,32 +1,28 @@
-import { motion } from "framer-motion";
+import { toTimecode } from "../../utils/timecode";
 
 export default function ProgressBar({ current, total }) {
-  const progress = ((current + 1) / total) * 100;
-
   return (
     <div className="mb-12">
-
-      <div className="mb-3 flex items-center justify-between text-sm text-zinc-400">
+      <div className="eyebrow mb-3 flex items-center justify-between text-xs text-paper-dim">
         <span>
-          Question {current + 1} of {total}
+          Scene {current + 1} of {total}
         </span>
-
-        <span>{Math.round(progress)}%</span>
+        <span>{Math.round(((current + 1) / total) * 100)}%</span>
       </div>
-
-      <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
-
-        <motion.div
-          animate={{ width: `${progress}%` }}
-          transition={{
-            duration: 0.5,
-            ease: "easeOut",
-          }}
-          className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500"
-        />
-
+      <div className="flex gap-1.5">
+        {Array.from({ length: total }).map((_, i) => (
+          <div
+            key={i}
+            className={`h-1 flex-1 rounded-full transition-colors duration-500 ${
+              i < current
+                ? "bg-brass"
+                : i === current
+                ? "bg-rec"
+                : "bg-ink-3"
+            }`}
+          />
+        ))}
       </div>
-
     </div>
   );
 }

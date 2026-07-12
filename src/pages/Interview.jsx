@@ -7,7 +7,8 @@ import LoadingScreen from "../components/Loading/LoadingScreen";
 import useInterview from "../hooks/useInterview";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { generateLegacy } from "../services/gemini";
+import { AlertTriangle } from "lucide-react";
+import { generateLegacy } from "../services/api";
 
 export default function Interview() {
     const {
@@ -16,22 +17,23 @@ export default function Interview() {
         question,
         answers,
         updateAnswer,
+        updateField,
         next,
         previous,
         clearInterview,
     } = useInterview();
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     async function handleGenerate() {
         try {
+            setError(null);
             setLoading(true);
 
             const story = await generateLegacy(answers);
-
-            console.log("Generated Story:", story);
 
             localStorage.setItem(
                 "legacy-story",
@@ -41,57 +43,65 @@ export default function Interview() {
             clearInterview();
 
             navigate("/story");
-        } catch (error) {
-            console.error(error);
-
-            alert(
-                error?.message ||
-                JSON.stringify(error, null, 2)
-            );
+        } catch (err) {
+            setError(err?.message || "The reel could not be cut. Try again.");
         } finally {
             setLoading(false);
         }
     }
 
+    if (loading) return <LoadingScreen />;
+
     return (
-        <>
-            {loading ?
-                (
-                    <LoadingScreen />
-                ) : (
-                    <div className="min-h-screen bg-zinc-950 text-white">
+        <div className="min-h-screen bg-ink text-paper">
 
-                        <div className="mx-auto max-w-4xl px-6 py-20">
+            <div className="mx-auto max-w-4xl px-6 py-20">
 
-                            <InterviewHeader />
+                <InterviewHeader />
 
-                            <ProgressBar
-                                current={current}
-                                total={total}
-                            />
+                <ProgressBar
+                    current={current}
+                    total={total}
+                />
 
-                            <AnimatedQuestion current={current}>
+                <AnimatedQuestion current={current}>
 
-                                <QuestionCard
-                                    question={question}
-                                    value={answers[question.key]}
-                                    updateAnswer={updateAnswer}
-                                />
+                    <QuestionCard
+                        question={question}
+                        value={answers[question.key]}
+                        updateAnswer={updateAnswer}
+                        answers={answers}
+                        updateField={updateField}
+                    />
 
-                            </AnimatedQuestion>
+                </AnimatedQuestion>
 
-                            <NavigationButtons
-                                current={current}
-                                total={total}
-                                previous={previous}
-                                next={next}
-                                onGenerate={handleGenerate}
-                            />
-
+                {error && (
+                    <div className="mt-8 flex items-start gap-3 rounded-2xl border border-rec/40 bg-rec/10 p-5">
+                        <AlertTriangle size={18} className="mt-0.5 shrink-0 text-rec" />
+                        <div>
+                            <p className="font-medium text-paper">Recording failed</p>
+                            <p className="mt-1 text-sm text-paper-dim">{error}</p>
                         </div>
-
+                        <button
+                            onClick={handleGenerate}
+                            className="ml-auto shrink-0 rounded-full border border-paper/20 px-4 py-2 text-sm transition hover:bg-paper/5"
+                        >
+                            Retry
+                        </button>
                     </div>
                 )}
-        </>
+
+                <NavigationButtons
+                    current={current}
+                    total={total}
+                    previous={previous}
+                    next={next}
+                    onGenerate={handleGenerate}
+                />
+
+            </div>
+
+        </div>
     );
 }

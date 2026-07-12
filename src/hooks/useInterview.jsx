@@ -3,6 +3,8 @@ import {questions} from "../data/questions"
 const STORAGE_KEY = "legacy-interview";
 
 const initialAnswers = {
+  name: "",
+  gender: "",
   passion: "",
   beginning: "",
   challenge: "",
@@ -33,6 +35,13 @@ export default function useInterview() {
     setAnswers((prev) => ({
       ...prev,
       [question.key]: value,
+    }));
+  }
+
+  function updateField(key, value) {
+    setAnswers((prev) => ({
+      ...prev,
+      [key]: value,
     }));
   }
 
@@ -70,6 +79,7 @@ export default function useInterview() {
     answers,
     total: questions.length,
     updateAnswer,
+    updateField,
     next,
     previous,
     clearInterview,

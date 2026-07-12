@@ -3,16 +3,16 @@ import { motion } from "framer-motion";
 export default function StoryHero({
     title,
     tagline,
-    quote
+    quote,
+    source
 }) {
 
     return (
 
-        <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-
-            {/* Background Glow */}
+        <section className="grain relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-10">
 
             <motion.div
+                aria-hidden
                 animate={{
                     x: [-40, 40, -40],
                     y: [20, -20, 20]
@@ -21,7 +21,7 @@ export default function StoryHero({
                     duration: 22,
                     repeat: Infinity
                 }}
-                className="absolute h-[700px] w-[700px] rounded-full bg-violet-600/20 blur-[180px]"
+                className="pointer-events-none absolute h-[700px] w-[700px] rounded-full bg-rec/10 blur-[180px]"
             />
 
             <div className="relative z-10 max-w-5xl text-center">
@@ -34,7 +34,7 @@ export default function StoryHero({
 
                     transition={{ duration: 1 }}
 
-                    className="font-serif text-7xl md:text-8xl"
+                    className="font-display text-4xl font-semibold md:text-8xl"
 
                 >
                     {title}
@@ -48,7 +48,7 @@ export default function StoryHero({
 
                     transition={{ delay: .4 }}
 
-                    className="mt-8 text-2xl text-zinc-400"
+                    className="mt-8 text-2xl text-paper-dim"
 
                 >
                     {tagline}
@@ -62,7 +62,7 @@ export default function StoryHero({
 
                     transition={{ delay: .8 }}
 
-                    className="mx-auto mt-20 max-w-3xl text-3xl italic text-zinc-300"
+                    className="mx-auto mt-20 max-w-3xl font-display text-3xl italic text-paper/90"
 
                 >
                     "{quote}"

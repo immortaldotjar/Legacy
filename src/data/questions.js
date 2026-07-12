@@ -1,5 +1,23 @@
 export const questions = [
   {
+    id: 0,
+    key: "name",
+    type: "text",
+    chapter: "Rolling Camera... and Action...",
+    question: "What's your name?",
+    placeholder: "e.g. Arjun",
+    extraField: {
+      key: "gender",
+      label: "Character gender",
+      helper: "The Name will be used to generate an accurate portrait for your chapters.",
+      options: [
+        { value: "male", label: "Male" },
+        { value: "female", label: "Female" },
+        { value: "", label: "Prefer not to say" },
+      ],
+    },
+  },
+  {
     id: 1,
     key: "passion",
     chapter: "The Spark",
@@ -11,14 +29,14 @@ export const questions = [
     key: "beginning",
     chapter: "The Beginning",
     question: "How did it all start?",
-    placeholder: "Describe the beginning..."
+    placeholder: "Describe the beginning of your Story..."
   },
   {
     id: 3,
     key: "challenge",
     chapter: "The Storm",
     question: "What was your biggest challenge?",
-    placeholder: "Share your experience..."
+    placeholder: "Share the experience..."
   },
   {
     id: 4,
