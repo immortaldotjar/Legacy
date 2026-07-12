@@ -62,10 +62,6 @@ function uploadBuffer(buffer, fileName) {
     });
 }
 
-// A real, intentionally dark/moody illustration still has variance between
-// pixels (edges, highlights, color). A safety-filter blackout is both very
-// dark AND almost perfectly uniform across every pixel - that combination
-// is what actually distinguishes "blank frame" from "just a dark scene".
 async function isBlankFrame(buffer) {
     try {
         const stats = await sharp(buffer).stats();
@@ -117,8 +113,6 @@ export async function generateImage(chapter, name, presentation) {
 
     for (let attempt = 1; attempt <= 2; attempt++) {
         try {
-            // On the retry, soften the scene text in case a specific word
-            // (weapon, fire, storm, blood, etc.) is what tripped the filter.
             const prompt = buildPrompt(chapter, name, presentation, attempt > 1);
 
             const buffer = await requestImage(prompt, WORKER_URL, API_KEY);

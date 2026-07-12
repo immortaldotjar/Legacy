@@ -104,7 +104,6 @@ Rules:
 
     const text = response.text.trim();
 
-    // Gemini sometimes wraps JSON
     const clean = text
         .replace(/```json/g, "")
         .replace(/```/g, "")
@@ -113,10 +112,6 @@ Rules:
     return JSON.parse(clean);
 }
 
-// Isolated on purpose: this must keep working even when the main story
-// generation call fails and falls back to the offline story, and it must
-// never throw - callers just get "" back and the image prompt omits any
-// gender instruction rather than forcing a wrong guess.
 async function inferPresentation(name) {
     if (!name || !process.env.GEMINI_API_KEY) return "";
 
@@ -178,16 +173,6 @@ export async function generateStory(req, res) {
         const images = await generateStoryImages(story.chapters, answers?.name, presentation);
 
         story.images = images;
-
-        // Proves to the /story page that this browser just completed a real
-        // generation call. httpOnly so it can't be read or forged from
-        // devtools/localStorage the way the story JSON itself can.
-        // "lax" only works when the frontend/backend are same-site (e.g.
-        // localhost:5173 + localhost:5000 during dev). Once deployed to two
-        // different *.onrender.com subdomains, that's cross-site, so the
-        // cookie needs sameSite: "none" + secure: true to be sent back on
-        // the /api/story/session check - without this, generation succeeds
-        // but the /story page always bounces back to "/" right after.
         const isProduction = process.env.NODE_ENV === "production";
 
         res.cookie(SESSION_COOKIE_NAME, createSessionCookieValue(), {

@@ -1,10 +1,5 @@
 import dotenv from "dotenv";
 dotenv.config();
-
-// Dynamic import matters here: a static `import app from "./app.js"` gets
-// hoisted and evaluated before dotenv.config() above ever runs, which is
-// exactly what was breaking GEMINI_API_KEY / CF_WORKER_URL - modules further
-// down the import tree were reading process.env before it was populated.
 const { default: app } = await import("./app.js");
 
 const PORT = process.env.PORT || 5000;
