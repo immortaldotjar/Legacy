@@ -4,7 +4,7 @@
 
 Answer a handful of questions about a passion, its origin, its hardest moment, and where it's headed — Legacy writes it as a narrative arc, generates a cinematic portrait-orientation illustration for every chapter, and presents it as a scroll-driven story reel with an overlapping-card transition between chapters.
 
-🔗 **Live demo:** _add your deployed URL here_
+🔗 **Live demo:** [Legacy](https://legacy-every-passion-has-a-story.onrender.com/)
 
 ---
 
